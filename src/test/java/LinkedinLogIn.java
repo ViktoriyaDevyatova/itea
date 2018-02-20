@@ -6,17 +6,21 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
+import static java.lang.Thread.sleep;
+
 /**
  * Created by Vika on 16.02.18.
  */
 public class LinkedinLogIn {
 
     @Test
-    public void successfullyLogin ()  {
+    public void successfullyLogin () throws InterruptedException {
 
         WebDriver webDriver = new FirefoxDriver();
 
-        webDriver.navigate().to("https://www.linkedin.com");
+        webDriver.navigate().to("https://www.linkedin.com/");
         //WebElement emailField = webDriver.findElement(By.xpath("//*[@id='login-email']");
         //WebElement password = webDriver.findElement(By.xpath("//*[@id='login-password']"));
 
@@ -28,10 +32,18 @@ public class LinkedinLogIn {
         password.sendKeys("linkedkurdo2106");
         submitButton.click();
 
-       // String linkedName = webDriver.findElement(By.("ember2242")).getAttribute("href");
-       // System.out.println("Welcome in LinkedIn" + linkedName);
+        //webDriver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 
-       // Asserts.check(linkedName.contains("Viktoria Devi"), "It's not your account");
+        sleep(5000);
+
+       String loginVerify = webDriver.findElement(By.xpath("//a[contains(@href, '/in/viktoria-devi-a5403115a/')]")).getAttribute("href");
+       Assert.assertEquals(loginVerify, "https://www.linkedin.com/in/viktoria-devi-a5403115a/");
+
+
+      // WebElement loginVerify = webDriver.findElement(By.xpath("//div[@class='left-rail-container Elevation-2dp mb2']//a[text()='Добро пожаловать, Viktoria!']"));
+      // Assert.assertTrue(loginVerify.isDisplayed(), "You are not loged in");
+
+
 
 
     }
