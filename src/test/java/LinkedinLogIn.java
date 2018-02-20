@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,12 +15,32 @@ import static java.lang.Thread.sleep;
  */
 public class LinkedinLogIn {
 
+    WebDriver webDriver;
+
+    @BeforeClass
+    public void beforeClass() {
+           }
+
+
+    @AfterClass
+    public void afterClass(){
+
+    }
+
+    @BeforeMethod
+    public void beforeTest(){
+        webDriver = new FirefoxDriver();
+        webDriver.navigate().to("https://www.linkedin.com/");
+    }
+
+    @AfterMethod
+    public void afterTest(){
+        webDriver.close();
+    }
+
     @Test
     public void successfullyLogin () throws InterruptedException {
 
-        WebDriver webDriver = new FirefoxDriver();
-
-        webDriver.navigate().to("https://www.linkedin.com/");
         //WebElement emailField = webDriver.findElement(By.xpath("//*[@id='login-email']");
         //WebElement password = webDriver.findElement(By.xpath("//*[@id='login-password']"));
 
@@ -36,7 +56,7 @@ public class LinkedinLogIn {
         password.sendKeys("linkedkurdo2106");
         submitButton.click();
 
-        sleep(5000);
+        sleep(20000);
 
         WebElement userIcon = webDriver.findElement(By.id("profile-nav-item"));
         Assert.assertTrue(userIcon.isDisplayed(),"User icon was not found");
@@ -57,16 +77,11 @@ public class LinkedinLogIn {
       // Assert.assertTrue(loginVerify.isDisplayed(), "You are not loged in");
 
 
-
-
     }
 
     @Test
-    public void negativeLogin ()  {
+    public void negativeLogin () throws InterruptedException {
 
-        WebDriver webDriver = new FirefoxDriver();
-
-        webDriver.navigate().to("https://www.linkedin.com");
         //WebElement emailField = webDriver.findElement(By.xpath("//*[@id='login-email']");
         //WebElement password = webDriver.findElement(By.xpath("//*[@id='login-password']"));
 
@@ -77,6 +92,8 @@ public class LinkedinLogIn {
         emailField.sendKeys("test@ukr.net");
         password.sendKeys("123456");
         submitButton.click();
+
+        sleep(20000);
 
         WebElement alertMessage = webDriver.findElement(By.xpath("//div[@id='global-alert-queue']//strong[not(text()='')]"));
 
