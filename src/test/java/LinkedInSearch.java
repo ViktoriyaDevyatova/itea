@@ -34,10 +34,10 @@ public class LinkedInSearch {
         loginPage.loginAs("v.devyatova@ukr.net", "linkedkurdo2106");
 
         //search
-        //WebElement searchField = webDriver.findElement(By.xpath("//input[@placeholder='Search']"));
-        //WebElement clickButton = webDriver.findElement(By.xpath("//*[@type='search-icon']"));
-        //searchField.sendKeys("hr");
-        //clickButton.click();
+        WebElement searchField = webDriver.findElement(By.xpath("//input[@placeholder='Search']"));
+        WebElement clickButton = webDriver.findElement(By.xpath("//*[@type='search-icon']"));
+        searchField.sendKeys("hr");
+        clickButton.click();
 
         //div[contains(@class, 'search-result-person')]
 
