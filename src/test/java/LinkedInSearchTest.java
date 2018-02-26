@@ -9,19 +9,21 @@ import org.testng.annotations.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static java.lang.Thread.sleep;
 
 /**
  * Created by Vika on 20.02.18.
  */
-public class LinkedInSearch {
+public class LinkedInSearchTest {
 
     WebDriver webDriver;
 
     @BeforeMethod
     public void beforeTest(){
         webDriver = new FirefoxDriver();
+        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         webDriver.navigate().to("https://www.linkedin.com/");
     }
 
@@ -48,30 +50,15 @@ public class LinkedInSearch {
         sleep(5000);
 
         List<WebElement> listOfResults = webDriver.findElements(By.xpath("//li[contains(@class, 'search-result__occluded-item')]"));
-      //  int jj = listOfResults.size();
-//        JavascriptExecutor js = ((JavascriptExecutor) webDriver);
-//        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
-//        js.executeScript("window.scrollBy(0,250)", "");
 
+        Assert.assertEquals(listOfResults.size(), 10, "Expected size of results is not 10" );
 
-       // List<WebElement> listOfResults = webDriver.findElements(By.cssSelector("div[class=\"search-result__info pt3 pb4 ph0\"]"));
-        System.out.println("how much results: " + listOfResults.size());
-        Assert.assertEquals(listOfResults.size(), 10, "Results of the search do not contain HR" );
-
-        for (int i =1; i < listOfResults.size(); i++){
-            ((JavascriptExecutor)webDriver).executeScript("arguments[0].scrollIntoView();", listOfResults.get(i));
-            String cardTitle = webDriver.findElement(By.xpath("//li[contains(@class, 'search-result__occluded-item')]["+i+"]//span[contains(@class, 'actor-name')]")).getText();
-            Assert.assertTrue(cardTitle.toLowerCase().contains(searchWord),"Search result does not contain HR in:" + Integer.toString(i));
-            System.out.println(cardTitle);
-
+        for (WebElement element:  listOfResults){
+            ((JavascriptExecutor)webDriver).executeScript("arguments[0].scrollIntoView();", element);
+            String elementText = element.getText().toLowerCase();
+            Assert.assertTrue(elementText.contains(searchWord),
+                    "Search result does not contain HR in element: " + element.getText());
         }
 
-
-
-
-
-
-
     }
-
 }

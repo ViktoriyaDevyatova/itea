@@ -1,7 +1,7 @@
 #idea trash
 *.iml
 .idea
-target
+/target
 
 # Compiled class file
 *.class

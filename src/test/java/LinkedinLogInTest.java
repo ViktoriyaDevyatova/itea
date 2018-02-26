@@ -13,7 +13,7 @@ import static java.lang.Thread.sleep;
 /**
  * Created by Vika on 16.02.18.
  */
-public class LinkedinLogIn {
+public class LinkedinLogInTest {
 
     WebDriver webDriver;
 
