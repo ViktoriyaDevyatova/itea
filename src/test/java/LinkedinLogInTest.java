@@ -41,49 +41,26 @@ public class LinkedinLogInTest {
     @Test
     public void successfullyLogin () throws InterruptedException {
 
-        //WebElement emailField = webDriver.findElement(By.xpath("//*[@id='login-email']");
-        //WebElement password = webDriver.findElement(By.xpath("//*[@id='login-password']"));
+        LinkedInLoginPage loginPage = new LinkedInLoginPage(webDriver);
 
-        String initialPageTitle = webDriver.getTitle();
-        String initialPageUrl = webDriver.getCurrentUrl();
-        Assert.assertEquals(webDriver.getTitle(), "LinkedIn: Log In or Sign Up", "Login page name is not correct");
+        String initialPageTitle = loginPage.getPageTitle();
+        String initialPageUrl = loginPage.getCurrentURL();
+        Assert.assertEquals(initialPageTitle, "LinkedIn: Log In or Sign Up",
+                                        "Login page name is not correct");
 
-        WebElement emailField = webDriver.findElement(By.id("login-email"));
-        WebElement password = webDriver.findElement(By.id("login-password"));
-        WebElement submitButton = webDriver.findElement(By.id("login-submit"));
+       LinkedInBasePage homePage = loginPage.loginAs("v.devyatova@ukr.net", "linkedkurdo2106");
 
-        emailField.sendKeys("v.devyatova@ukr.net");
-        password.sendKeys("linkedkurdo2106");
-        submitButton.click();
+        Assert.assertTrue(homePage.isSignedIn(),"User is not signed in");
 
-        sleep(20000);
-
-        WebElement userIcon = webDriver.findElement(By.id("profile-nav-item"));
-        Assert.assertTrue(userIcon.isDisplayed(),"User icon was not found");
-        Assert.assertNotEquals(webDriver.getTitle(), initialPageTitle, "Page title did not change after login");
-        Assert.assertNotEquals(webDriver.getCurrentUrl(), initialPageUrl, "URL after login did not change");
-
-
-
-        //webDriver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-
-
-
-       //String loginVerify = webDriver.findElement(By.xpath("//a[contains(@href, '/in/viktoria-devi-a5403115a/')]")).getAttribute("href");
-       //Assert.assertEquals(loginVerify, "https://www.linkedin.com/in/viktoria-devi-a5403115a/");
-
-
-      // WebElement loginVerify = webDriver.findElement(By.xpath("//div[@class='left-rail-container Elevation-2dp mb2']//a[text()='Добро пожаловать, Viktoria!']"));
-      // Assert.assertTrue(loginVerify.isDisplayed(), "You are not loged in");
-
+        Assert.assertNotEquals(homePage.getPageTitle(), initialPageTitle,
+                                        "Page title did not change after login");
+        Assert.assertNotEquals(homePage.getCurrentURL(), initialPageUrl,
+                                        "URL after login did not change");
 
     }
 
     @Test
     public void negativeLogin () throws InterruptedException {
-
-        //WebElement emailField = webDriver.findElement(By.xpath("//*[@id='login-email']");
-        //WebElement password = webDriver.findElement(By.xpath("//*[@id='login-password']"));
 
         WebElement emailField = webDriver.findElement(By.id("login-email"));
         WebElement password = webDriver.findElement(By.id("login-password"));
@@ -98,12 +75,6 @@ public class LinkedinLogInTest {
         WebElement alertMessage = webDriver.findElement(By.xpath("//div[@id='global-alert-queue']//strong[not(text()='')]"));
 
         Assert.assertTrue(alertMessage.isDisplayed(), "Message is absent");
-
-        // String linkedName = webDriver.findElement(By.("ember2242")).getAttribute("href");
-        // System.out.println("Welcome in LinkedIn" + linkedName);
-
-        // Asserts.check(linkedName.contains("Viktoria Devi"), "It's not your account");
-
 
     }
 }

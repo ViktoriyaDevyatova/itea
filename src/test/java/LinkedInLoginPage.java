@@ -11,11 +11,12 @@ import static java.lang.Thread.sleep;
 /**
  * Created by Vika on 20.02.18.
  */
-public class LinkedInLoginPage {
+public class LinkedInLoginPage  extends LinkedInBasePage{
 
     WebDriver webDriver;
 
     public LinkedInLoginPage(WebDriver webDriver){
+        super(webDriver);
         this.webDriver = webDriver;
     }
 
@@ -32,25 +33,13 @@ public class LinkedInLoginPage {
      }
 
 
-    public void loginAs (String username, String password)throws InterruptedException {
+    public LinkedInBasePage loginAs (String username, String password)throws InterruptedException {
          initElements();
         emailField.sendKeys(username);
         passwordField.sendKeys(password);
         submitButton.click();
-        sleep(5000);
+        return new LinkedInBasePage(webDriver);
     }
 
-    public void waitTillElementIsClickable (WebElement webElement){
-        WebDriverWait wait = new WebDriverWait(webDriver, 10);
-        wait.until(ExpectedConditions.elementToBeClickable(webElement));
-    }
-
-    public void waitTillElementIsClickable (WebElement webElement, int timeoutInSeconds){
-        WebDriverWait wait = new WebDriverWait(webDriver, timeoutInSeconds);
-        wait.until(ExpectedConditions.elementToBeClickable(webElement));
-
-
-
-    }
 
 }
