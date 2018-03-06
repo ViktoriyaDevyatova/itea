@@ -62,19 +62,24 @@ public class LinkedinLogInTest {
     @Test
     public void negativeLogin () throws InterruptedException {
 
-        WebElement emailField = webDriver.findElement(By.id("login-email"));
-        WebElement password = webDriver.findElement(By.id("login-password"));
-        WebElement submitButton = webDriver.findElement(By.id("login-submit"));
+        LinkedInLoginPage loginPage = new LinkedInLoginPage(webDriver);
 
-        emailField.sendKeys("test@ukr.net");
-        password.sendKeys("123456");
-        submitButton.click();
+        LinkedInSignInPage unsuccessfullSignInPage = loginPage.unsuccessfullLogin("test@ukr.net", "123456");
+        System.out.println("Login is unsuccessfull");
 
-        sleep(20000);
+//        WebElement emailField = webDriver.findElement(By.id("login-email"));
+//        WebElement password = webDriver.findElement(By.id("login-password"));
+//        WebElement submitButton = webDriver.findElement(By.id("login-submit"));
 
-        WebElement alertMessage = webDriver.findElement(By.xpath("//div[@id='global-alert-queue']//strong[not(text()='')]"));
+//        emailField.sendKeys("test@ukr.net");
+//        password.sendKeys("123456");
+//        submitButton.click();
+//
+//        sleep(20000);
 
-        Assert.assertTrue(alertMessage.isDisplayed(), "Message is absent");
+       // WebElement alertMessage = webDriver.findElement(By.xpath("//div[@id='global-alert-queue']//strong[not(text()='')]"));
+
+//        Assert.assertTrue(signInPage.alertMessage(), "Message is absent");
 
     }
 }

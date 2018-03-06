@@ -5,8 +5,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import static java.lang.Thread.sleep;
+
 
 /**
  * Created by Vika on 20.02.18.
@@ -24,7 +24,7 @@ public class LinkedInLoginPage  extends LinkedInBasePage{
      private WebElement passwordField;
      private WebElement submitButton;
 
-     private void initElements()  {
+     private void initElements()   {
 
          emailField = webDriver.findElement(By.id("login-email"));
          waitTillElementIsClickable(emailField, 5);
@@ -41,5 +41,12 @@ public class LinkedInLoginPage  extends LinkedInBasePage{
         return new LinkedInBasePage(webDriver);
     }
 
+    public LinkedInSignInPage unsuccessfullLogin (String username, String password)throws InterruptedException {
+        initElements();
+        emailField.sendKeys(username);
+        passwordField.sendKeys(password);
+        submitButton.click();
+        return new LinkedInSignInPage(webDriver);
+    }
 
 }
