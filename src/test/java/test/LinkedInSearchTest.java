@@ -1,3 +1,5 @@
+package test;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -5,9 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import page.LinkedInLandingPage;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -37,7 +39,7 @@ public class LinkedInSearchTest {
     public void basicSearchTest() throws InterruptedException, AWTException {
 
 
-        LinkedInLoginPage loginPage = new LinkedInLoginPage(webDriver);
+        LinkedInLandingPage loginPage = new LinkedInLandingPage(webDriver);
         loginPage.loginAs("v.devyatova@ukr.net", "linkedkurdo2106");
 
         //search

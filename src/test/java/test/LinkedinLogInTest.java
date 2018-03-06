@@ -1,12 +1,13 @@
+package test;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
-
-import java.util.concurrent.TimeUnit;
+import page.LinkedInBasePage;
+import page.LinkedInLandingPage;
+import page.LinkedInSignInPage;
+import page.LinkedInHomePage;
 
 import static java.lang.Thread.sleep;
 
@@ -16,6 +17,9 @@ import static java.lang.Thread.sleep;
 public class LinkedinLogInTest {
 
     WebDriver webDriver;
+    LinkedInLandingPage landingPage;
+    String initialPageTitle;
+    String initialPageUrl;
 
     @BeforeClass
     public void beforeClass() {
@@ -31,6 +35,9 @@ public class LinkedinLogInTest {
     public void beforeTest(){
         webDriver = new FirefoxDriver();
         webDriver.navigate().to("https://www.linkedin.com/");
+        landingPage = new LinkedInLandingPage(webDriver);
+        initialPageTitle = landingPage.getPageTitle();
+        initialPageUrl = landingPage.getCurrentURL();
     }
 
     @AfterMethod
@@ -41,14 +48,10 @@ public class LinkedinLogInTest {
     @Test
     public void successfullyLogin () throws InterruptedException {
 
-        LinkedInLoginPage loginPage = new LinkedInLoginPage(webDriver);
-
-        String initialPageTitle = loginPage.getPageTitle();
-        String initialPageUrl = loginPage.getCurrentURL();
         Assert.assertEquals(initialPageTitle, "LinkedIn: Log In or Sign Up",
                                         "Login page name is not correct");
 
-       LinkedInBasePage homePage = loginPage.loginAs("v.devyatova@ukr.net", "linkedkurdo2106");
+        LinkedInHomePage homePage = landingPage.loginAs("v.devyatova@ukr.net", "linkedkurdo2106");
 
         Assert.assertTrue(homePage.isSignedIn(),"User is not signed in");
 
@@ -62,24 +65,10 @@ public class LinkedinLogInTest {
     @Test
     public void negativeLogin () throws InterruptedException {
 
-        LinkedInLoginPage loginPage = new LinkedInLoginPage(webDriver);
+       // page.LinkedInLandingPage linkedInLandingPage = new page.LinkedInLandingPage(webDriver);
 
-        LinkedInSignInPage unsuccessfullSignInPage = loginPage.unsuccessfullLogin("test@ukr.net", "123456");
+        LinkedInSignInPage unsuccessfullSignInPage = landingPage.unsuccessfullLogin("test@ukr.net", "123456");
         System.out.println("Login is unsuccessfull");
-
-//        WebElement emailField = webDriver.findElement(By.id("login-email"));
-//        WebElement password = webDriver.findElement(By.id("login-password"));
-//        WebElement submitButton = webDriver.findElement(By.id("login-submit"));
-
-//        emailField.sendKeys("test@ukr.net");
-//        password.sendKeys("123456");
-//        submitButton.click();
-//
-//        sleep(20000);
-
-       // WebElement alertMessage = webDriver.findElement(By.xpath("//div[@id='global-alert-queue']//strong[not(text()='')]"));
-
-//        Assert.assertTrue(signInPage.alertMessage(), "Message is absent");
 
     }
 }

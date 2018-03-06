@@ -1,3 +1,5 @@
+package test;
+
 import com.sun.xml.internal.ws.policy.sourcemodel.AssertionData;
 import org.apache.http.util.Asserts;
 import org.openqa.selenium.By;
