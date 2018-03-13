@@ -4,9 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import page.LinkedInBasePage;
 import page.LinkedInLandingPage;
-import page.LinkedInSignInPage;
+import page.LinkedInLoginPage;
 import page.LinkedInHomePage;
 
 import static java.lang.Thread.sleep;
@@ -67,8 +66,8 @@ public class LinkedinLogInTest {
 
        // page.LinkedInLandingPage linkedInLandingPage = new page.LinkedInLandingPage(webDriver);
 
-        LinkedInSignInPage unsuccessfullSignInPage = landingPage.unsuccessfullLogin("test@ukr.net", "123456");
-        System.out.println("Login is unsuccessfull");
+//        LinkedInLoginPage unsuccessfullSignInPage = landingPage.unsuccessfullLogin("test@ukr.net", "123456");
+//        System.out.println("Login is unsuccessfull");
 
     }
 }

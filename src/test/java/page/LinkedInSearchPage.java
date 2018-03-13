@@ -5,51 +5,43 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Vika on 13.03.18.
  */
-public class LinkedInSearchPage {
+public class LinkedInSearchPage extends LinkedInBasePage {
 
-    WebDriver webDriver;
-    String elementText;
+    @FindBy(xpath = "//li[contains(@class, 'search-result__occluded-item')]")
+    private List<WebElement> listOfResults;
 
+//    @FindBy(xpath = "//div[@role='main']")
+//    private WebElement resultsContainer;
+
+    @FindBy(xpath = "//div[@class= 'search-results top-page ember-view']")
+    private WebElement resultsContainer;
 
     public LinkedInSearchPage(WebDriver webDriver) {
-        this.webDriver = webDriver;
+        super(webDriver);
+    PageFactory.initElements(webDriver, this);
     }
 
-//    @FindBy(xpath = "//input[@placeholder='Search']")
-//    private
-//    WebElement searchField;
-//
-//    @FindBy(xpath = "//*[@type='search-icon']")
-//    private
-//    WebElement clickButton;
+    public List<String> getResuls() {
 
-    public void waitTitleChange() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(webDriver, 5);
-        wait.until(ExpectedConditions.titleContains("Search"));
-    }
-
-    public List<WebElement> listOfResults;
-
-
-
-    public String checkOfSearchResult() {
-        for (WebElement element : listOfResults) {
-            ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView();", element);
-            elementText = element.getText().toLowerCase();
-//            Assert.assertTrue(elementText.contains(searchWord),
-//                    "Search result does not contain HR in element: " + element.getText());
-
+        waitTillElementIsVisible(resultsContainer, 5);
+        List<String> resultStringList = new ArrayList();
+        for (WebElement element:  listOfResults){
+            ((JavascriptExecutor)webDriver).executeScript("arguments[0].scrollIntoView();", element);
+            String cardTitle = element.getText();
+            resultStringList.add(cardTitle);
         }
-
-    return elementText;
+        return resultStringList;
     }
-}
+
+    }

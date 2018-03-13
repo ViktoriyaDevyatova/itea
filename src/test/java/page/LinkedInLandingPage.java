@@ -14,8 +14,6 @@ import static java.lang.Thread.sleep;
  */
 public class LinkedInLandingPage extends LinkedInBasePage{
 
-    //  WebDriver webDriver;
-
     @FindBy(id = "login-email")
     private WebElement emailField;
 
@@ -40,22 +38,17 @@ public class LinkedInLandingPage extends LinkedInBasePage{
         emailField.sendKeys(username);
         passwordField.sendKeys(password);
         submitButton.click();
-        //if (submitButton.isDisplayed()){
-          //  return (T) this;
-        if (getPageTitle().equals("LinkedIn: Log In or Sign Up")){
-            return (T) this;
+
+        if (getCurrentURL().contains("/login-submit")){
+            return (T) new LinkedInLoginPage(webDriver);
         }
-        else {return (T) PageFactory.initElements(webDriver,LinkedInHomePage.class);
+        if (getCurrentURL().contains("/feed")){
+            return (T) new LinkedInHomePage(webDriver);
+        }
+        else {
+            return (T) this;
         }
 
     }
-
-//    public LinkedInSignInPage unsuccessfullLogin (String username, String password)throws InterruptedException {
-//        waitTillElementIsClickable(emailField, 5);
-//        emailField.sendKeys(username);
-//        passwordField.sendKeys(password);
-//        submitButton.click();
-//        return new LinkedInSignInPage(webDriver);
-//    }
 
 }

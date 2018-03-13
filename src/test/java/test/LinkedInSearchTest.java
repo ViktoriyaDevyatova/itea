@@ -8,6 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import page.LinkedInBasePage;
+import page.LinkedInHomePage;
 import page.LinkedInLandingPage;
 import page.LinkedInSearchPage;
 
@@ -22,25 +23,11 @@ import static java.lang.Thread.sleep;
 public class LinkedInSearchTest {
 
     WebDriver webDriver;
-    WebElement searchField;
-    WebElement clickButton;
-    String searchWord;
-    //List<WebElement> listOfResults;
-    LinkedInLandingPage loginPage;
-    LinkedInBasePage linkedInBasePage;
-    LinkedInSearchPage linkedInSearchPage;
-
 
     @BeforeMethod
-    public void beforeTest()throws InterruptedException, AWTException{
+    public void beforeTest(){
         webDriver = new FirefoxDriver();
         webDriver.navigate().to("https://www.linkedin.com/");
-        loginPage = new LinkedInLandingPage(webDriver);
-        loginPage.loginAs("v.devyatova@ukr.net", "linkedkurdo2106");
-       searchField = webDriver.findElement(By.xpath("//input[@placeholder='Search']"));
-       clickButton = webDriver.findElement(By.xpath("//*[@type='search-icon']"));
-     searchWord = "hr";
-
     }
 
     @AfterMethod
@@ -52,28 +39,20 @@ public class LinkedInSearchTest {
     @Test
     public void basicSearchTest() throws InterruptedException {
 
-        linkedInSearchPage = new LinkedInSearchPage(webDriver);
+        String searchWord = "hr";
 
-        searchField.sendKeys(searchWord);
-        clickButton.click();
+        LinkedInLandingPage loginPage = new LinkedInLandingPage(webDriver);
+        LinkedInHomePage homePage = loginPage.loginAs("v.devyatova@ukr.net", "linkedkurdo2106");
+        LinkedInSearchPage searchPage = homePage.searchByTerm(searchWord);
+        List<String> results = searchPage.getResuls();
 
-        //linkedInSearchPage = new LinkedInSearchPage(webDriver);
-        linkedInSearchPage.waitTitleChange();
+        Assert.assertEquals(results.size(), 10,
+                "Expected size of results is not 10" );
 
-        linkedInSearchPage.listOfResults = webDriver.findElements(By.xpath("//li[contains(@class, 'search-result__occluded-item')]"));
-
-        Assert.assertEquals(linkedInSearchPage.listOfResults.size(), 10,
-                                                "Expected size of results is not 10" );
-
-        Assert.assertTrue(linkedInSearchPage.checkOfSearchResult().contains(searchWord),
-                "Search result does not contain HR in element");
-
-//        for (WebElement element:  linkedInSearchPage.listOfResults){
-//            ((JavascriptExecutor)webDriver).executeScript("arguments[0].scrollIntoView();", element);
-//            String elementText = element.getText().toLowerCase();
-//            Assert.assertTrue(elementText.contains(searchWord),
-//                    "Search result does not contain HR in element: " + element.getText());
-//        }
+        for (String result: results){
+            Assert.assertTrue(result.toLowerCase().contains(searchWord),
+                    "Search results does not contain HR in element" );
+        }
 
     }
 
