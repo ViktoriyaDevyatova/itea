@@ -50,12 +50,12 @@ public class LinkedInLandingPage extends LinkedInBasePage{
 
     }
 
-    public LinkedInSignInPage unsuccessfullLogin (String username, String password)throws InterruptedException {
-        waitTillElementIsClickable(emailField, 5);
-        emailField.sendKeys(username);
-        passwordField.sendKeys(password);
-        submitButton.click();
-        return new LinkedInSignInPage(webDriver);
-    }
+//    public LinkedInSignInPage unsuccessfullLogin (String username, String password)throws InterruptedException {
+//        waitTillElementIsClickable(emailField, 5);
+//        emailField.sendKeys(username);
+//        passwordField.sendKeys(password);
+//        submitButton.click();
+//        return new LinkedInSignInPage(webDriver);
+//    }
 
 }

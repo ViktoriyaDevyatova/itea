@@ -37,10 +37,9 @@ public class LinkedInSearchTest {
         webDriver.navigate().to("https://www.linkedin.com/");
         loginPage = new LinkedInLandingPage(webDriver);
         loginPage.loginAs("v.devyatova@ukr.net", "linkedkurdo2106");
-        searchField = webDriver.findElement(By.xpath("//input[@placeholder='Search']"));
-        clickButton = webDriver.findElement(By.xpath("//*[@type='search-icon']"));
-        searchWord = "hr";
-        //linkedInBasePage = new LinkedInBasePage(webDriver);
+       searchField = webDriver.findElement(By.xpath("//input[@placeholder='Search']"));
+       clickButton = webDriver.findElement(By.xpath("//*[@type='search-icon']"));
+     searchWord = "hr";
 
     }
 
@@ -53,15 +52,15 @@ public class LinkedInSearchTest {
     @Test
     public void basicSearchTest() throws InterruptedException {
 
+        linkedInSearchPage = new LinkedInSearchPage(webDriver);
+
         searchField.sendKeys(searchWord);
         clickButton.click();
 
-        linkedInSearchPage = new LinkedInSearchPage(webDriver);
+        //linkedInSearchPage = new LinkedInSearchPage(webDriver);
         linkedInSearchPage.waitTitleChange();
 
-        sleep(500);
-
-        //listOfResults = webDriver.findElements(By.xpath("//li[contains(@class, 'search-result__occluded-item')]"));
+        linkedInSearchPage.listOfResults = webDriver.findElements(By.xpath("//li[contains(@class, 'search-result__occluded-item')]"));
 
         Assert.assertEquals(linkedInSearchPage.listOfResults.size(), 10,
                                                 "Expected size of results is not 10" );
