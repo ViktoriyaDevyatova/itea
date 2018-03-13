@@ -7,11 +7,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import page.LinkedInBasePage;
 import page.LinkedInLandingPage;
+import page.LinkedInSearchPage;
 
 import java.awt.*;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static java.lang.Thread.sleep;
 
@@ -21,12 +22,26 @@ import static java.lang.Thread.sleep;
 public class LinkedInSearchTest {
 
     WebDriver webDriver;
+    WebElement searchField;
+    WebElement clickButton;
+    String searchWord;
+    //List<WebElement> listOfResults;
+    LinkedInLandingPage loginPage;
+    LinkedInBasePage linkedInBasePage;
+    LinkedInSearchPage linkedInSearchPage;
+
 
     @BeforeMethod
-    public void beforeTest(){
+    public void beforeTest()throws InterruptedException, AWTException{
         webDriver = new FirefoxDriver();
-        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         webDriver.navigate().to("https://www.linkedin.com/");
+        loginPage = new LinkedInLandingPage(webDriver);
+        loginPage.loginAs("v.devyatova@ukr.net", "linkedkurdo2106");
+        searchField = webDriver.findElement(By.xpath("//input[@placeholder='Search']"));
+        clickButton = webDriver.findElement(By.xpath("//*[@type='search-icon']"));
+        searchWord = "hr";
+        //linkedInBasePage = new LinkedInBasePage(webDriver);
+
     }
 
     @AfterMethod
@@ -36,31 +51,31 @@ public class LinkedInSearchTest {
 
 
     @Test
-    public void basicSearchTest() throws InterruptedException, AWTException {
+    public void basicSearchTest() throws InterruptedException {
 
-
-        LinkedInLandingPage loginPage = new LinkedInLandingPage(webDriver);
-        loginPage.loginAs("v.devyatova@ukr.net", "linkedkurdo2106");
-
-        //search
-        WebElement searchField = webDriver.findElement(By.xpath("//input[@placeholder='Search']"));
-        WebElement clickButton = webDriver.findElement(By.xpath("//*[@type='search-icon']"));
-        String searchWord = "hr";
         searchField.sendKeys(searchWord);
         clickButton.click();
 
-        sleep(5000);
+        linkedInSearchPage = new LinkedInSearchPage(webDriver);
+        linkedInSearchPage.waitTitleChange();
 
-        List<WebElement> listOfResults = webDriver.findElements(By.xpath("//li[contains(@class, 'search-result__occluded-item')]"));
+        sleep(500);
 
-        Assert.assertEquals(listOfResults.size(), 10, "Expected size of results is not 10" );
+        //listOfResults = webDriver.findElements(By.xpath("//li[contains(@class, 'search-result__occluded-item')]"));
 
-        for (WebElement element:  listOfResults){
-            ((JavascriptExecutor)webDriver).executeScript("arguments[0].scrollIntoView();", element);
-            String elementText = element.getText().toLowerCase();
-            Assert.assertTrue(elementText.contains(searchWord),
-                    "Search result does not contain HR in element: " + element.getText());
-        }
+        Assert.assertEquals(linkedInSearchPage.listOfResults.size(), 10,
+                                                "Expected size of results is not 10" );
+
+        Assert.assertTrue(linkedInSearchPage.checkOfSearchResult().contains(searchWord),
+                "Search result does not contain HR in element");
+
+//        for (WebElement element:  linkedInSearchPage.listOfResults){
+//            ((JavascriptExecutor)webDriver).executeScript("arguments[0].scrollIntoView();", element);
+//            String elementText = element.getText().toLowerCase();
+//            Assert.assertTrue(elementText.contains(searchWord),
+//                    "Search result does not contain HR in element: " + element.getText());
+//        }
 
     }
+
 }

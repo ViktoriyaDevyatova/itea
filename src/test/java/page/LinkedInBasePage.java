@@ -44,7 +44,6 @@ public class LinkedInBasePage {
     public void waitTillElementIsClickable (WebElement webElement, int timeoutInSeconds){
         WebDriverWait wait = new WebDriverWait(webDriver, timeoutInSeconds);
         wait.until(ExpectedConditions.elementToBeClickable(webElement));
-
     }
 
-}
+   }

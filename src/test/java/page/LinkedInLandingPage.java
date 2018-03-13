@@ -26,6 +26,8 @@ public class LinkedInLandingPage extends LinkedInBasePage{
     private WebElement submitButton;
 
 
+
+
     public LinkedInLandingPage(WebDriver webDriver){
         super(webDriver);
        // this.webDriver = webDriver;
@@ -38,7 +40,9 @@ public class LinkedInLandingPage extends LinkedInBasePage{
         emailField.sendKeys(username);
         passwordField.sendKeys(password);
         submitButton.click();
-        if (submitButton.isDisplayed()){
+        //if (submitButton.isDisplayed()){
+          //  return (T) this;
+        if (getPageTitle().equals("LinkedIn: Log In or Sign Up")){
             return (T) this;
         }
         else {return (T) PageFactory.initElements(webDriver,LinkedInHomePage.class);
