@@ -64,10 +64,18 @@ public class LinkedinLogInTest {
     @Test
     public void negativeLogin () throws InterruptedException {
 
-       // page.LinkedInLandingPage linkedInLandingPage = new page.LinkedInLandingPage(webDriver);
+        Assert.assertEquals(initialPageTitle, "LinkedIn: Log In or Sign Up",
+                "Login page name is not correct");
 
-//        LinkedInLoginPage unsuccessfullSignInPage = landingPage.unsuccessfullLogin("test@ukr.net", "123456");
-//        System.out.println("Login is unsuccessfull");
+        LinkedInLoginPage signInPage = landingPage.loginAs("test@ukr.net", "123456");
+
+        Assert.assertTrue(signInPage.failedLogin(),"User is signed in");
+
+        Assert.assertNotEquals(signInPage.getPageTitle(), initialPageTitle,
+                "Page title did not change after login");
+
+        Assert.assertNotEquals(signInPage.getCurrentURL(), initialPageUrl,
+                "URL after login did not change");
 
     }
 }

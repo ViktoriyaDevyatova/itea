@@ -23,10 +23,20 @@ public class LinkedInLoginPage extends LinkedInBasePage{
     @FindBy(id = "btn-primary")
     private WebElement submitButton;
 
+    @FindBy(xpath = "//div[@id='global-alert-queue']//strong[not(text()='')]")
+    private WebElement alertMessage;
+
     public LinkedInLoginPage(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);
     }
+
+    public boolean failedLogin (){
+        waitTillElementIsClickable(alertMessage);
+        return alertMessage.isDisplayed();
+    }
+
+
 
 
 
