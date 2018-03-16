@@ -1,7 +1,5 @@
 package test;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import page.LinkedInLandingPage;
@@ -13,39 +11,16 @@ import static java.lang.Thread.sleep;
 /**
  * Created by Vika on 16.02.18.
  */
-public class LinkedinLogInTest {
+public class LinkedinLogInTest extends LinkedInBaseTest{
 
-    WebDriver webDriver;
-    LinkedInLandingPage landingPage;
-    String initialPageTitle;
-    String initialPageUrl;
-
-    @BeforeClass
-    public void beforeClass() {
-           }
-
-
-    @AfterClass
-    public void afterClass(){
-
-    }
-
-    @BeforeMethod
-    public void beforeTest(){
-        webDriver = new FirefoxDriver();
-        webDriver.navigate().to("https://www.linkedin.com/");
-        landingPage = new LinkedInLandingPage(webDriver);
-        initialPageTitle = landingPage.getPageTitle();
-        initialPageUrl = landingPage.getCurrentURL();
-    }
-
-    @AfterMethod
-    public void afterTest(){
-        webDriver.close();
-    }
+//    String initialPageTitle; - зберегти в пейджі і зробити свойствами (сетить и читать)
+//    String initialPageUrl;
 
     @Test
     public void successfullyLogin () throws InterruptedException {
+
+        String initialPageTitle = landingPage.getPageTitle();
+        String  initialPageUrl = landingPage.getCurrentURL();
 
         Assert.assertEquals(initialPageTitle, "LinkedIn: Log In or Sign Up",
                                         "Login page name is not correct");
@@ -61,21 +36,66 @@ public class LinkedinLogInTest {
 
     }
 
-    @Test
-    public void negativeLogin () throws InterruptedException {
+
+    @DataProvider
+    public Object[][] negatineTestCredentialsReturnToLanding() {
+        return new Object[][]{
+                {"", "123456"}};
+          }
+
+
+    @Test(dataProvider = "negatineTestCredentialsReturnToLanding")
+    public void negativeLoginReturnToLanding (String email, String password) throws InterruptedException {
+
+        String initialPageTitle = landingPage.getPageTitle();
+        String initialPageUrl = landingPage.getCurrentURL();
 
         Assert.assertEquals(initialPageTitle, "LinkedIn: Log In or Sign Up",
                 "Login page name is not correct");
 
-        LinkedInLoginPage signInPage = landingPage.loginAs("test@ukr.net", "123456");
+        LinkedInLandingPage LandingPage = landingPage.loginAs(email, password);
 
-        Assert.assertTrue(signInPage.failedLogin(),"User is signed in");
+      //  Assert.assertTrue(LandingPage.loginAs(),"User is signed in");
 
-        Assert.assertNotEquals(signInPage.getPageTitle(), initialPageTitle,
+        Assert.assertEquals(LandingPage.getPageTitle(), initialPageTitle,
                 "Page title did not change after login");
 
-        Assert.assertNotEquals(signInPage.getCurrentURL(), initialPageUrl,
+        Assert.assertEquals(LandingPage.getCurrentURL(), initialPageUrl,
                 "URL after login did not change");
 
+    }
+
+    @DataProvider
+    public Object[][] negatineTestCredentialsReturnToLogin() {
+        return new Object[][]{
+                {"test@ukr.net","123456", "Hmm, we don't recognize that email. Please try again.",
+                        "Hmm, that's not the right password. Please try again or request a new one."},
+        };
+    }
+
+    @Test(dataProvider = "negatineTestCredentialsReturnToLogin")
+    public void negativeLoginReturnToLogin (String email, String password, String emailNotification, String passwordNotification) throws InterruptedException {
+
+        String initialPageTitle = landingPage.getPageTitle();
+        String initialPageUrl = landingPage.getCurrentURL();
+
+        Assert.assertEquals(initialPageTitle, "LinkedIn: Log In or Sign Up",
+                "Login page name is not correct");
+
+        LinkedInLoginPage loginPage = landingPage.loginAs(email, password);
+
+        Assert.assertTrue(loginPage.failedLogin(),"User is signed in");
+
+        Assert.assertNotEquals(loginPage.getPageTitle(), initialPageTitle,
+                "Page title did not change after login");
+
+        Assert.assertNotEquals(loginPage.getCurrentURL(), initialPageUrl,
+                "URL after login did not change");
+
+        String actualEmailMessage = loginPage.getEmailMessage();
+        String actualPassMessage = loginPage.gePassMessage();
+
+        Assert.assertEquals(emailNotification, actualEmailMessage, "Actual and Expected mssages are not equel");
+        Assert.assertEquals(passwordNotification, actualPassMessage, "Actual and Expected mssages are not equel");
     }
 }

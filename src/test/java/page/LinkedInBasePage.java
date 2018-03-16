@@ -15,19 +15,10 @@ public class LinkedInBasePage {
 
     WebDriver webDriver;
 
-//    @FindBy(id = "profile-nav-item")
-//    private WebElement userIcon;
-
     public LinkedInBasePage(WebDriver webDriver){
         this.webDriver = webDriver;
         //PageFactory.initElements(webDriver, this);
     }
-
-
-//    public boolean isSignedIn (){
-//        waitTillElementIsClickable(userIcon);
-//        return userIcon.isDisplayed();
-//    }
 
     public String getPageTitle (){
         return webDriver.getTitle();
