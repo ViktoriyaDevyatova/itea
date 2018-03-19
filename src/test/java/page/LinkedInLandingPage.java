@@ -19,7 +19,7 @@ public class LinkedInLandingPage extends LinkedInBasePage{
     @FindBy(id = "login-submit")
     private WebElement submitButton;
 
-    @FindBy(id = "link-forgot-password")
+    @FindBy(xpath = "//a[@class= 'link-forgot-password']")
     private WebElement forgotPassword;
 
 
@@ -48,7 +48,6 @@ public class LinkedInLandingPage extends LinkedInBasePage{
     }
 
     public boolean failedLogin () {
-        waitTillElementIsClickable(forgotPassword);
         return forgotPassword.isDisplayed();
     }
 
