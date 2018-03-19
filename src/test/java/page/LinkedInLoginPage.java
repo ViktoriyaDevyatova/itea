@@ -36,6 +36,13 @@ public class LinkedInLoginPage extends LinkedInBasePage{
         return alertMessage.isDisplayed();
     }
 
+    public String getEmailMessage (){
+      return   webDriver.findElement(By.id("session_key-login-error")).getText();
+    }
+
+    public String getPassMessage (){
+        return   webDriver.findElement(By.id("session_password-login-error")).getText();
+    }
 
 
 

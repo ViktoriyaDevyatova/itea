@@ -5,10 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static java.lang.Thread.dumpStack;
-import static java.lang.Thread.sleep;
-
-
 /**
  * Created by Vika on 20.02.18.
  */
@@ -23,7 +19,8 @@ public class LinkedInLandingPage extends LinkedInBasePage{
     @FindBy(id = "login-submit")
     private WebElement submitButton;
 
-
+    @FindBy(id = "link-forgot-password")
+    private WebElement forgotPassword;
 
 
     public LinkedInLandingPage(WebDriver webDriver){
@@ -33,7 +30,7 @@ public class LinkedInLandingPage extends LinkedInBasePage{
     }
 
 
-    public <T> T loginAs (String username, String password)throws InterruptedException {
+    public <T> T loginAs(String username, String password) throws InterruptedException {
         waitTillElementIsClickable(emailField, 5);
         emailField.sendKeys(username);
         passwordField.sendKeys(password);
@@ -48,7 +45,12 @@ public class LinkedInLandingPage extends LinkedInBasePage{
         else {
             return (T) this;
         }
-
     }
+
+    public boolean failedLogin () {
+        waitTillElementIsClickable(forgotPassword);
+        return forgotPassword.isDisplayed();
+    }
+
 
 }
