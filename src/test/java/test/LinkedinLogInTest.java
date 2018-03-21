@@ -6,8 +6,6 @@ import page.LinkedInLandingPage;
 import page.LinkedInLoginPage;
 import page.LinkedInHomePage;
 
-import static java.lang.Thread.sleep;
-
 /**
  * Created by Vika on 16.02.18.
  */
@@ -48,11 +46,11 @@ public class LinkedinLogInTest extends LinkedInBaseTest{
     @DataProvider
     public Object[][] negatineTestCredentialsReturnToLanding() {
         return new Object[][]{
-                {"", ""}
-//                {"", "linkedkurdo2106"},
-//                {"", "12345"},
-//                {"test.ukr.net", ""},
-//                {"v.devyatova@ukr.net", ""}
+                {"", ""},
+                {"", "linkedkurdo2106"},
+                {"", "12345"},
+                {"test.ukr.net", ""},
+                {"v.devyatova@ukr.net", ""}
                };
           }
 
