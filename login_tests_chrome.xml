@@ -1,10 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Login tests on Firefox browser" verbose="1" >
+<suite name="Login tests on Chrome browser" verbose="1" >
     <test name="Nopackage" >
-        <parameter name="browserType" value="firefox"/>
-        <parameter name="url" value="https://ua.linkedin.com/"/>
-
+        <parameter name="browserType" value="chrome"/>
+        <parameter name="url" value="https://www.linkedin.com/"/>
         <classes>
             <class name="test.LinkedinLogInTest" />
         </classes>

@@ -22,25 +22,26 @@ public class LinkedInBaseTest {
     //homework - update with switchcase + additional paremeter - URL ua.linkedin.com + 2 xml files: 1st with firefox and www.linkedin.com, 2nd with chrome and ua.linkedin.com
     @Parameters({"browserType", "url"})
     @BeforeMethod
-    public void beforeTest(@Optional("chrome") String browserType){
+    public void beforeTest(@Optional("chrome") String browserType, @Optional("https://www.linkedin.com/") String url){
 
-        if (browserType.toLowerCase().equals("firefox")){
-            WebDriverManager.firefoxdriver().setup();
-            webDriver = new FirefoxDriver();
+        switch (browserType.toLowerCase()){
+            case "firefox":
+                WebDriverManager.firefoxdriver().setup();
+                webDriver = new FirefoxDriver();
+                break;
+            case "chrome":
+                WebDriverManager.chromedriver().setup();
+                webDriver = new ChromeDriver();
+                break;
+            default:
+                System.out.println("Unsupported browser");
+                break;
         }
-        if (browserType.toLowerCase().equals("chrome")){
-            WebDriverManager.chromedriver().setup();
-            webDriver = new ChromeDriver();
-        }
 
-        else {
-            System.out.println("Unsupported browser");
-        }
-
-       // System.setProperty("webdriver.gecko.driver", "/home/Vika/Downloads/geckodriver");
+        webDriver.navigate().to(url);
+    //    webDriver.get("https://www.linkedin.com/");
 
 
-        webDriver.navigate().to("https://www.linkedin.com/");
         landingPage = new LinkedInLandingPage(webDriver);
     }
 
