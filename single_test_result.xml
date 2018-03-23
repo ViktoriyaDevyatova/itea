@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Successfully Login test" verbose="1" >
+    <test name="Nopackage" >
+        <parameter name="browserType" value="chrome"/>
+        <parameter name="url" value="https://www.linkedin.com/"/>
+
+        <classes>
+            <class name="test.LinkedinLogInTest" >
+            <methods>
+                    <include name="successfullyLogin"/>
+            </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

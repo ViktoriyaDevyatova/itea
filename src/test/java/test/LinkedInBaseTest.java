@@ -19,10 +19,10 @@ public class LinkedInBaseTest {
     LinkedInLandingPage landingPage;
 
 
-    //homework - update with switchcase + additional paremeter - URL ua.linkedin.com + 2 xml files: 1st with firefox and www.linkedin.com, 2nd with chrome and ua.linkedin.com
+
     @Parameters({"browserType", "url"})
     @BeforeMethod
-    public void beforeTest(@Optional("chrome") String browserType, @Optional("https://www.linkedin.com/") String url){
+    public void beforeTest(@Optional("firefox") String browserType, @Optional("https://www.linkedin.com/") String url){
 
         switch (browserType.toLowerCase()){
             case "firefox":
@@ -35,7 +35,7 @@ public class LinkedInBaseTest {
                 break;
             default:
                 System.out.println("Unsupported browser");
-                break;
+                 break;
         }
 
         webDriver.navigate().to(url);

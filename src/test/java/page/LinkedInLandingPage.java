@@ -52,4 +52,9 @@ public class LinkedInLandingPage extends LinkedInBasePage{
     }
 
 
+    public LinkedInRequestPassResetPage forgotPassLinkClick() {
+        forgotPassword.click();
+        return new LinkedInRequestPassResetPage(webDriver);
+    }
+
 }

@@ -141,4 +141,5 @@ public class LinkedinLogInTest extends LinkedInBaseTest{
 
        Assert.assertEquals(passwordNotification, actualPassMessage, "Actual and Expected mssages are not equel");
     }
+
 }
