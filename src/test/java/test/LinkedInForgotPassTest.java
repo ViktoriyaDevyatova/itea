@@ -2,10 +2,7 @@ package test;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import page.LinkedINResetPassSubmit;
-import page.LinkedInRequestPassResetPage;
-import page.LinkedInRequestPassResetSubmitPage;
-import page.LinkedInResetPass;
+import page.*;
 import vika.GMailService;
 import vika.GmailServiceImproved;
 
@@ -20,7 +17,7 @@ public class LinkedInForgotPassTest extends LinkedInBaseTest {
     String messageSubjectPartial = "Vivien, here's the link to reset your password";
     String messageToPartial = "vivien.leeeeeee@gmail.com";
     String messageFromPartial = "security-noreply@linkedin.com";
-    String newPassword = "VD!kurdo21063";
+    String newPassword = "VD!kurdo2106";
 
     @Test
     public void SuccessfullPassReset() throws InterruptedException {
@@ -51,6 +48,9 @@ public class LinkedInForgotPassTest extends LinkedInBaseTest {
 
         LinkedINResetPassSubmit resetPassSubmit = resetPass.resetPassSubmit(newPassword);
         Assert.assertTrue(resetPassSubmit.isLoaded(), "resetSubmitPage is not loaded");
+
+        LinkedInHomePage homePage = resetPassSubmit.navigateToHomePage();
+        Assert.assertTrue(homePage.isSignedIn(), "You are not signed in");
     }
 }
 

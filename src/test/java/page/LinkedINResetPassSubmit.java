@@ -14,6 +14,9 @@ public class LinkedINResetPassSubmit extends  LinkedInBasePage {
     @FindBy(xpath = "//div[@class= 'flow-login-content']")
     private WebElement successfullPassResetMessage;
 
+    @FindBy(xpath = "//a[@class= 'btn-secondary-transparent']")
+    private WebElement goToHomeButton;
+
     public LinkedINResetPassSubmit(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);
@@ -27,5 +30,10 @@ public class LinkedINResetPassSubmit extends  LinkedInBasePage {
             isLoaded = false;
         }
         return isLoaded;
+    }
+
+    public LinkedInHomePage navigateToHomePage() {
+        goToHomeButton.click();
+        return new LinkedInHomePage(webDriver);
     }
 }
