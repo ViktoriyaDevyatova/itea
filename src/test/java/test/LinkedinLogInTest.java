@@ -66,7 +66,7 @@ public class LinkedinLogInTest extends LinkedInBaseTest{
 
         LinkedInLandingPage landingPage = this.landingPage.loginAs(email, password);
 
-        Assert.assertTrue(landingPage.failedLogin(),"User is signed in");
+        Assert.assertTrue(landingPage.forgotPasswordButtonIsPresent(),"User is signed in");
 
         Assert.assertEquals(landingPage.getPageTitle(), initialPageTitle,
                 "Page title did not change after login");

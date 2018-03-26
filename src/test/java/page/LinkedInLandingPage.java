@@ -47,7 +47,7 @@ public class LinkedInLandingPage extends LinkedInBasePage{
         }
     }
 
-    public boolean failedLogin () {
+    public boolean forgotPasswordButtonIsPresent() {
         return forgotPassword.isDisplayed();
     }
 
