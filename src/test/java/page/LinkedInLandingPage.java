@@ -1,5 +1,6 @@
 package page;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -55,6 +56,16 @@ public class LinkedInLandingPage extends LinkedInBasePage{
     public LinkedInRequestPassResetPage forgotPassLinkClick() {
         forgotPassword.click();
         return new LinkedInRequestPassResetPage(webDriver);
+    }
+
+    public boolean isLoaded() {
+        boolean isLoaded;
+        try {
+            isLoaded = emailField.isDisplayed();
+        } catch (NoSuchElementException e) {
+            isLoaded = false;
+        }
+        return isLoaded;
     }
 
 }

@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 /**
  * Created by Vika on 25.03.18.
  */
-public class LinkedINResetPassSubmit extends  LinkedInBasePage {
+public class LinkedInResetPassSuccessPage extends  LinkedInBasePage {
 
     @FindBy(xpath = "//div[@class= 'flow-login-content']")
     private WebElement successfullPassResetMessage;
@@ -17,7 +17,7 @@ public class LinkedINResetPassSubmit extends  LinkedInBasePage {
     @FindBy(xpath = "//a[@class= 'btn-secondary-transparent']")
     private WebElement goToHomeButton;
 
-    public LinkedINResetPassSubmit(WebDriver webDriver) {
+    public LinkedInResetPassSuccessPage(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);
     }

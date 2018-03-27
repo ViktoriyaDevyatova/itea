@@ -1,6 +1,7 @@
 package page;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -44,7 +45,15 @@ public class LinkedInLoginPage extends LinkedInBasePage{
         return   webDriver.findElement(By.id("session_password-login-error")).getText();
     }
 
-
+    public boolean isLoaded() {
+        boolean isLoaded;
+        try {
+            isLoaded = emailField.isDisplayed();
+        } catch (NoSuchElementException e) {
+            isLoaded = false;
+        }
+        return isLoaded;
+    }
 
 
 

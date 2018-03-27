@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  * Created by Vika on 27.02.18.
  */
-public class LinkedInBasePage {
+public abstract class LinkedInBasePage {
 
     WebDriver webDriver;
 
@@ -28,17 +28,26 @@ public class LinkedInBasePage {
         return  webDriver.getCurrentUrl();
     }
 
-    public void waitTillElementIsClickable (WebElement webElement){
+    /**
+     * Wait untill WebElement is clickable on web page
+     *  @param webElement - WebElement to wait for
+     * @return WebElement after wait
+     */
+    public WebElement waitTillElementIsClickable (WebElement webElement){
         waitTillElementIsClickable(webElement,5);
+        return webElement;
     }
 
-    public void waitTillElementIsClickable (WebElement webElement, int timeoutInSeconds){
+    public WebElement waitTillElementIsClickable (WebElement webElement, int timeoutInSeconds){
         WebDriverWait wait = new WebDriverWait(webDriver, timeoutInSeconds);
         wait.until(ExpectedConditions.elementToBeClickable(webElement));
+        return webElement;
     }
 
     public void waitTillElementIsVisible (WebElement webElement, int timeoutInSeconds){
         WebDriverWait wait = new WebDriverWait(webDriver, timeoutInSeconds);
         wait.until(ExpectedConditions.visibilityOf(webElement));
     }
+
+    public abstract boolean isLoaded();
    }

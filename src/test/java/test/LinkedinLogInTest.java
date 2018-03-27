@@ -33,7 +33,7 @@ public class LinkedinLogInTest extends LinkedInBaseTest{
 
         LinkedInHomePage homePage = landingPage.loginAs(email, password);
 
-        Assert.assertTrue(homePage.isSignedIn(),"User is not signed in");
+        Assert.assertTrue(homePage.isLoaded(),"User is not signed in");
 
         Assert.assertNotEquals(homePage.getPageTitle(), initialPageTitle,
                                         "Page title did not change after login");

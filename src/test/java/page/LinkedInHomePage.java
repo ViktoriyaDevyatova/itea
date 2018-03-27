@@ -1,5 +1,6 @@
 package page;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -24,7 +25,7 @@ public class LinkedInHomePage extends LinkedInBasePage {
         PageFactory.initElements(webDriver, this);
     }
 
-    public boolean isSignedIn (){
+    public boolean isLoaded(){
         waitTillElementIsClickable(userIcon);
         return userIcon.isDisplayed();
     }
@@ -34,4 +35,6 @@ public class LinkedInHomePage extends LinkedInBasePage {
         searchIcon.click();
         return new LinkedInSearchPage(webDriver);
     }
+
+
 }

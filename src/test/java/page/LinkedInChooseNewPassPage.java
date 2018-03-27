@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 /**
  * Created by Vika on 25.03.18.
  */
-public class LinkedInResetPass extends LinkedInBasePage {
+public class LinkedInChooseNewPassPage extends LinkedInBasePage {
 
     @FindBy(id = "new_password-newPassword-passwordReset")
     private WebElement newPass;
@@ -20,7 +20,7 @@ public class LinkedInResetPass extends LinkedInBasePage {
     @FindBy(id = "reset")
     private WebElement submitButton;
 
-    public LinkedInResetPass(WebDriver webDriver) {
+    public LinkedInChooseNewPassPage(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);
     }
@@ -35,10 +35,10 @@ public class LinkedInResetPass extends LinkedInBasePage {
         return isLoaded;
     }
 
-    public LinkedINResetPassSubmit resetPassSubmit(String newPassword) {
+    public LinkedInResetPassSuccessPage submitNewPass(String newPassword) {
         newPass.sendKeys(newPassword);
         retypeNewPass.sendKeys(newPassword);
-        submitButton.click();
-        return new LinkedINResetPassSubmit(webDriver);
+        waitTillElementIsClickable(submitButton).click();
+        return new LinkedInResetPassSuccessPage(webDriver);
     }
 }
