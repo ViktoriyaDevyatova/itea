@@ -15,15 +15,27 @@ import static java.lang.Thread.sleep;
  */
 public class LinkedInLoginPage extends LinkedInBasePage{
 
+    /**
+     *Find the email field on the web page
+     */
     @FindBy(id = "session_key-login")
     private WebElement emailField;
 
+    /**
+     *Find the password field on the web page
+     */
     @FindBy(id = "session_password-login")
     private WebElement passwordField;
 
+    /**
+     *Find the Submit button on the web page
+     */
     @FindBy(id = "btn-primary")
     private WebElement submitButton;
 
+    /**
+     *Find the message about incorrect credentials
+     */
     @FindBy(xpath = "//div[@id='global-alert-queue']//strong[not(text()='')]")
     private WebElement alertMessage;
 
@@ -32,19 +44,32 @@ public class LinkedInLoginPage extends LinkedInBasePage{
         PageFactory.initElements(webDriver, this);
     }
 
+    /**
+     *Verifies if the login was failed
+     */
     public boolean failedLogin (){
         waitTillElementIsClickable(alertMessage);
         return alertMessage.isDisplayed();
     }
 
+    /**
+     *Verifies the alert message because of incorrect email
+     */
     public String getEmailMessage (){
       return   webDriver.findElement(By.id("session_key-login-error")).getText();
     }
 
+    /**
+     *Verifies the alert message because of incorrect password
+     */
     public String getPassMessage (){
         return   webDriver.findElement(By.id("session_password-login-error")).getText();
     }
 
+    /**
+     *confirm if the page is loaded
+     *  @return boolean expression
+     */
     public boolean isLoaded() {
         boolean isLoaded;
         try {

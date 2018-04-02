@@ -11,9 +11,15 @@ import org.openqa.selenium.support.PageFactory;
  */
 public class LinkedInResetPassSuccessPage extends  LinkedInBasePage {
 
+    /**
+     *Finds the successfull pass change message on the web page
+     */
     @FindBy(xpath = "//div[@class= 'flow-login-content']")
     private WebElement successfullPassResetMessage;
 
+    /**
+     *Finds the Fo to Home button on the web page
+     */
     @FindBy(xpath = "//a[@class= 'btn-secondary-transparent']")
     private WebElement goToHomeButton;
 
@@ -22,6 +28,10 @@ public class LinkedInResetPassSuccessPage extends  LinkedInBasePage {
         PageFactory.initElements(webDriver, this);
     }
 
+    /**
+     *confirm if the page is loaded
+     *  @return boolean expression
+     */
     public boolean isLoaded() {
         boolean isLoaded;
         try {
@@ -32,6 +42,10 @@ public class LinkedInResetPassSuccessPage extends  LinkedInBasePage {
         return isLoaded;
     }
 
+    /**
+     * Navigates to home page
+     * @return home page
+     */
     public LinkedInHomePage navigateToHomePage() {
         goToHomeButton.click();
         return new LinkedInHomePage(webDriver);

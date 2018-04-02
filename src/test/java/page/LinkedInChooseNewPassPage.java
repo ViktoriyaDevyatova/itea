@@ -11,12 +11,21 @@ import org.openqa.selenium.support.PageFactory;
  */
 public class LinkedInChooseNewPassPage extends LinkedInBasePage {
 
+    /**
+     *Find the field new password
+     */
     @FindBy(id = "new_password-newPassword-passwordReset")
     private WebElement newPass;
 
+    /**
+     *Find the field retype new password
+     */
     @FindBy(id = "new_password_again-newPassword-passwordReset")
     private WebElement retypeNewPass;
 
+    /**
+     *Find the Submit button
+     */
     @FindBy(id = "reset")
     private WebElement submitButton;
 
@@ -25,6 +34,10 @@ public class LinkedInChooseNewPassPage extends LinkedInBasePage {
         PageFactory.initElements(webDriver, this);
     }
 
+    /**
+     *confirm that page is loaded
+     *  @return boolean expression
+     */
     public boolean isLoaded() {
         boolean isLoaded;
         try {
@@ -35,6 +48,11 @@ public class LinkedInChooseNewPassPage extends LinkedInBasePage {
         return isLoaded;
     }
 
+    /**
+     *Enter and submit new password on SubmitNewwPass web page
+     * @param newPassword - new password
+     * @return new web page LinkedInResetPassSuccessPage(
+     */
     public LinkedInResetPassSuccessPage submitNewPass(String newPassword) {
         newPass.sendKeys(newPassword);
         retypeNewPass.sendKeys(newPassword);

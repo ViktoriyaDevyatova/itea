@@ -13,7 +13,9 @@ import vika.GmailServiceImproved;
  */
 public class LinkedInRequestPassResetSubmitPage extends LinkedInBasePage {
 
-
+    /**
+     *Find the ResentLink button on the web page
+     */
     @FindBy(xpath = "//a[@class= 'status-link btn-resend-link']")
     private WebElement resendLinkButton;
 
@@ -24,6 +26,10 @@ public class LinkedInRequestPassResetSubmitPage extends LinkedInBasePage {
 
     }
 
+    /**
+     *confirm if the page is loaded
+     *  @return boolean expression
+     */
     public boolean isLoaded() {
         boolean isLoaded;
         try {
@@ -39,6 +45,11 @@ public class LinkedInRequestPassResetSubmitPage extends LinkedInBasePage {
         return new LinkedInChooseNewPassPage(webDriver);
     }
 
+    /**
+     *Connects to gmail srvice and get email for password changing
+     * @param messageToPartial - email subject
+     * @return link to navigate for pass changing
+     */
     public String getResetPassLink(String messageToPartial) {
         String messageSubjectPartial = "Vivien, here's the link to reset your password";
         String messageFromPartial = "security-noreply@linkedin.com";

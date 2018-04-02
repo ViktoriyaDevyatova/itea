@@ -11,15 +11,27 @@ import org.openqa.selenium.support.PageFactory;
  */
 public class LinkedInLandingPage extends LinkedInBasePage{
 
+    /**
+     *Find the email field on the web page
+     */
     @FindBy(id = "login-email")
     private WebElement emailField;
 
+    /**
+     *Find the password field on the web page
+     */
     @FindBy(id = "login-password")
     private WebElement passwordField;
 
+    /**
+     *Find the Submit button on the web page
+     */
     @FindBy(id = "login-submit")
     private WebElement submitButton;
 
+    /**
+     *Find the Forgot password link on the web page
+     */
     @FindBy(xpath = "//a[@class= 'link-forgot-password']")
     private WebElement forgotPassword;
 
@@ -31,6 +43,14 @@ public class LinkedInLandingPage extends LinkedInBasePage{
     }
 
 
+    /**
+     * Enter user email and password and verifies new wnavigeted to webpage
+     * @param username - user email to login
+     * @param password - user password to login
+     * @param <T> - generic type
+     * @return - new web page
+     * @throws InterruptedException
+     */
     public <T> T loginAs(String username, String password) throws InterruptedException {
         waitTillElementIsClickable(emailField, 5);
         emailField.sendKeys(username);
@@ -48,16 +68,27 @@ public class LinkedInLandingPage extends LinkedInBasePage{
         }
     }
 
+    /**
+     *Verifies if the Forgot password link is present on the web page
+     */
     public boolean forgotPasswordButtonIsPresent() {
         return forgotPassword.isDisplayed();
     }
 
 
-    public LinkedInRequestPassResetPage forgotPassLinkClick() {
+    /**
+     *Click to the button Forgot Password
+     * @return new web page LinkedInRequestPassResetPage
+     */
+     public LinkedInRequestPassResetPage forgotPassLinkClick() {
         forgotPassword.click();
         return new LinkedInRequestPassResetPage(webDriver);
     }
 
+    /**
+     *confirm if the page is loaded
+     *  @return boolean expression
+     */
     public boolean isLoaded() {
         boolean isLoaded;
         try {

@@ -11,12 +11,21 @@ import org.openqa.selenium.support.PageFactory;
  */
 public class LinkedInHomePage extends LinkedInBasePage {
 
+    /**
+     *Find the webelement user icon
+     */
     @FindBy(id = "profile-nav-item")
     private WebElement userIcon;
 
+    /**
+     *Find the search ield
+     */
     @FindBy(xpath = "//input[@placeholder='Search']")
     private  WebElement searchField;
 
+    /**
+     *Find the webelement search icon
+     */
     @FindBy(xpath = "//*[@type='search-icon']")
     private  WebElement searchIcon;
 
@@ -25,11 +34,20 @@ public class LinkedInHomePage extends LinkedInBasePage {
         PageFactory.initElements(webDriver, this);
     }
 
+    /**
+     *confirm if the page is loaded
+     *  @return boolean expression
+     */
     public boolean isLoaded(){
         waitTillElementIsClickable(userIcon);
         return userIcon.isDisplayed();
     }
 
+    /**
+     *Enter and submit new password on SubmitNewwPass web page
+     * @param searchWord - term for serch
+     * @return new web page LinkedInSearchPage with search results
+     */
     public LinkedInSearchPage searchByTerm(String searchWord) {
         searchField.sendKeys(searchWord);
         searchIcon.click();

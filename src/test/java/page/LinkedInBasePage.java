@@ -30,7 +30,7 @@ public abstract class LinkedInBasePage {
 
     /**
      * Wait untill WebElement is clickable on web page
-     *  @param webElement - WebElement to wait for
+     * @param webElement - WebElement to wait for
      * @return WebElement after wait
      */
     public WebElement waitTillElementIsClickable (WebElement webElement){
@@ -38,12 +38,25 @@ public abstract class LinkedInBasePage {
         return webElement;
     }
 
+
+    /**
+     * Wait untill WebElement is clickable on web page
+     * @param webElement - WebElement to wait for
+     * @param timeoutInSeconds - time to wait
+     * @return WebElement after wait
+     */
     public WebElement waitTillElementIsClickable (WebElement webElement, int timeoutInSeconds){
         WebDriverWait wait = new WebDriverWait(webDriver, timeoutInSeconds);
         wait.until(ExpectedConditions.elementToBeClickable(webElement));
         return webElement;
     }
 
+
+    /**
+     *Wait untill WebElement is visible on web page
+     * @param webElement - WebElement to wait for
+     * @param timeoutInSeconds - time to wait
+     */
     public void waitTillElementIsVisible (WebElement webElement, int timeoutInSeconds){
         WebDriverWait wait = new WebDriverWait(webDriver, timeoutInSeconds);
         wait.until(ExpectedConditions.visibilityOf(webElement));

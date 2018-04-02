@@ -14,12 +14,15 @@ import java.util.List;
  */
 public class LinkedInSearchPage extends LinkedInBasePage {
 
+    /**
+     *Find the list with search results
+     */
     @FindBy(xpath = "//li[contains(@class, 'search-result__occluded-item')]")
     private List<WebElement> listOfResults;
 
-//    @FindBy(xpath = "//div[@role='main']")
-//    private WebElement resultsContainer;
-
+    /**
+     *Finds the container with search results
+     */
     @FindBy(xpath = "//div[@class= 'search-results top-page ember-view']")
     private WebElement resultsContainer;
 
@@ -28,6 +31,11 @@ public class LinkedInSearchPage extends LinkedInBasePage {
     PageFactory.initElements(webDriver, this);
     }
 
+
+    /**
+     * Compare every element in the list with search therm
+     * @return list of results
+     */
     public List<String> getResuls() {
 
         waitTillElementIsVisible(resultsContainer, 5);
@@ -39,6 +47,11 @@ public class LinkedInSearchPage extends LinkedInBasePage {
         }
         return resultStringList;
     }
+
+    /**
+     *confirm if the page is loaded
+     *  @return boolean expression
+     */
     public boolean isLoaded() {
         boolean isLoaded;
         try {
