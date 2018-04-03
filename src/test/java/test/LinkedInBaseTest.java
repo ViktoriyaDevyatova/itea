@@ -19,7 +19,11 @@ public class LinkedInBaseTest {
     LinkedInLandingPage landingPage;
 
 
-
+    /**
+     * Runs before every test to open webdriver
+     * @param browserType - type of the webdriver to use
+     * @param url - url navigate to
+     */
     @Parameters({"browserType", "url"})
     @BeforeMethod
     public void beforeTest(@Optional("firefox") String browserType, @Optional("https://www.linkedin.com/") String url){
@@ -45,6 +49,9 @@ public class LinkedInBaseTest {
         landingPage = new LinkedInLandingPage(webDriver);
     }
 
+    /**
+     * Runs after every test to close webdriver
+     */
     @AfterMethod
     public void afterTest(){
         webDriver.close();

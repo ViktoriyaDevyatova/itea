@@ -12,7 +12,7 @@ import java.util.List;
 public class LinkedInSearchTest extends LinkedInBaseTest{
 
     /**
-     * Verify basic Search by specific search therm
+     * Verifies basic Search by specific search therm
      * @throws InterruptedException
      */
     @Test

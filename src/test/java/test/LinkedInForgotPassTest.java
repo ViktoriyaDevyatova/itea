@@ -14,6 +14,10 @@ public class LinkedInForgotPassTest extends LinkedInBaseTest {
     String email = "vivien.leeeeeee@gmail.com";
     String newPassword = "VD!kurdo2106";
 
+    /**
+     * Test to verify Forgot Password functionality
+     * @throws InterruptedException
+     */
     @Test
     public void SuccessfullPassReset() throws InterruptedException {
 

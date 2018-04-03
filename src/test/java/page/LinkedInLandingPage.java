@@ -30,7 +30,7 @@ public class LinkedInLandingPage extends LinkedInBasePage{
     private WebElement submitButton;
 
     /**
-     *Find the Forgot password link on the web page
+     *Finds the Forgot password link on the web page
      */
     @FindBy(xpath = "//a[@class= 'link-forgot-password']")
     private WebElement forgotPassword;
@@ -44,11 +44,12 @@ public class LinkedInLandingPage extends LinkedInBasePage{
 
 
     /**
-     * Enter user email and password and verifies new wnavigeted to webpage
+     * Enters user email and password and verifies navigeted webpage
      * @param username - user email to login
      * @param password - user password to login
-     * @param <T> - generic type
-     * @return - new web page
+     * @param <T> - generic type (allows to return different types)
+     * @return - new web page according to entered credentials
+     * (LinkedInLoginPage - incorrect credentials, LinkedInHomePage - correct credentials)
      * @throws InterruptedException
      */
     public <T> T loginAs(String username, String password) throws InterruptedException {
@@ -82,11 +83,14 @@ public class LinkedInLandingPage extends LinkedInBasePage{
      */
      public LinkedInRequestPassResetPage forgotPassLinkClick() {
         forgotPassword.click();
-        return new LinkedInRequestPassResetPage(webDriver);
+        return new LinkedInRequestPassResetPage(webDriver); /**
+     * Get the title of the current web page
+     * @return title of the web page
+     */
     }
 
     /**
-     *confirm if the page is loaded
+     *confirms if the page is loaded
      *  @return boolean expression
      */
     public boolean isLoaded() {

@@ -29,6 +29,10 @@ public class LinkedInChooseNewPassPage extends LinkedInBasePage {
     @FindBy(id = "reset")
     private WebElement submitButton;
 
+    /**
+     * Standard consturctor for LinkedIn base page to initialize webdriver
+     * @param webDriver - webdriver to use
+     */
     public LinkedInChooseNewPassPage(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);

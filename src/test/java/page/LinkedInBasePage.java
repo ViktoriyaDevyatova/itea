@@ -8,22 +8,32 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-/**
- * Created by Vika on 27.02.18.
- */
+
 public abstract class LinkedInBasePage {
 
     WebDriver webDriver;
 
+    /**
+     * Constructor for LinkedIn base page to initialize webdriver
+     * @param webDriver - webdriver to use
+     */
     public LinkedInBasePage(WebDriver webDriver){
         this.webDriver = webDriver;
         //PageFactory.initElements(webDriver, this);
     }
 
+    /**
+     * Get the title of the current web page
+     * @return title of the web page
+     */
     public String getPageTitle (){
         return webDriver.getTitle();
     }
 
+    /**
+     * Get the url of the current web page
+     * @return url of the web page
+     */
     public String getCurrentURL (){
         return  webDriver.getCurrentUrl();
     }

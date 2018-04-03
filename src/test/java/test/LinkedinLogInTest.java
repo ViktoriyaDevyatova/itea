@@ -14,6 +14,9 @@ public class LinkedinLogInTest extends LinkedInBaseTest{
 //    String initialPageTitle; - зберегти в пейджі і зробити свойствами (сетить и читать)
 //    String initialPageUrl;
 
+    /**
+     * provides correct credentials for the test successfullyLogin
+     */
     @DataProvider
     public Object[][] successfullyLogin() {
         return new Object[][]{
@@ -22,6 +25,13 @@ public class LinkedinLogInTest extends LinkedInBaseTest{
         };
     }
 
+
+    /**
+     *Test to verify successfull login to user account
+     *  @param email - user email to login
+     * @param password - user password to login
+     * @throws InterruptedException
+     */
     @Test(dataProvider = "successfullyLogin")
     public void successfullyLogin (String email, String password)  throws InterruptedException {
 
@@ -55,6 +65,13 @@ public class LinkedinLogInTest extends LinkedInBaseTest{
           }
 
 
+    /**
+     *Test to verify negative login with incorrect credentials
+     *  @param email - usincorrect email to login
+     * @param password - incorrect password to login
+     * @throws InterruptedException
+     */
+
     @Test(dataProvider = "negatineTestCredentialsReturnToLanding")
     public void negativeLoginReturnToLanding (String email, String password) throws InterruptedException {
 
@@ -83,6 +100,13 @@ public class LinkedinLogInTest extends LinkedInBaseTest{
                         "The password you provided must have at least 6 characters."},
         };
     }
+
+    /**
+     *Test to verify negative login with incorrect credentials
+     *  @param email - usincorrect email to login
+     * @param password - incorrect password to login
+     * @throws InterruptedException
+     */
 
     @Test(dataProvider = "negatineTestCredentialsReturnToLogin")
     public void negativeLoginReturnToLoginIncorrectCred (String email, String password, String emailNotification, String passwordNotification) throws InterruptedException {
@@ -117,6 +141,13 @@ public class LinkedinLogInTest extends LinkedInBaseTest{
                 {"v.devyatova.ukr.net", "2106", "The password you provided must have at least 6 characters."}
         };
     }
+
+    /**
+     *Test to verify negative login with incorrect credentials
+     * @param email - usincorrect email to login
+     * @param password - incorrect password to login
+     * @throws InterruptedException
+     */
 
     @Test(dataProvider = "negativeTestEmailReturnToLogin")
     public void negativeLoginReturnToLoginIncorrectPass (String email, String password, String passwordNotification) throws InterruptedException {
