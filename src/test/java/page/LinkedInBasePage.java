@@ -14,12 +14,12 @@ public abstract class LinkedInBasePage {
     WebDriver webDriver;
 
     /**
-     * Constructor for LinkedIn base page to initialize webdriver
-     * @param webDriver - webdriver to use
+     * Constructor of LinkedInBasePage which takes webdriver instance initialized in @BeforeMethod
+     * for reuse in LinkedInBasePage class methods
+     * @param webDriver - webdriver instance
      */
     public LinkedInBasePage(WebDriver webDriver){
         this.webDriver = webDriver;
-        //PageFactory.initElements(webDriver, this);
     }
 
     /**

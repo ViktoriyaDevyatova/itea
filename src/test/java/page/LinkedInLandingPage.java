@@ -44,10 +44,10 @@ public class LinkedInLandingPage extends LinkedInBasePage{
 
 
     /**
-     * Enters user email and password and verifies navigeted webpage
+     * Method which enters user email into email field and password into password field and verifies navigeted webpage
      * @param username - user email to login
      * @param password - user password to login
-     * @param <T> - generic type (allows to return different types)
+     * @param <T> - used to return different types of pages
      * @return - new web page according to entered credentials
      * (LinkedInLoginPage - incorrect credentials, LinkedInHomePage - correct credentials)
      * @throws InterruptedException
@@ -83,7 +83,8 @@ public class LinkedInLandingPage extends LinkedInBasePage{
      */
      public LinkedInRequestPassResetPage forgotPassLinkClick() {
         forgotPassword.click();
-        return new LinkedInRequestPassResetPage(webDriver); /**
+        return new LinkedInRequestPassResetPage(webDriver);
+        /**
      * Get the title of the current web page
      * @return title of the web page
      */
