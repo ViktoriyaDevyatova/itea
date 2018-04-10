@@ -8,7 +8,7 @@
         <classes>
             <class name="test.LinkedinLogInTest" >
             <methods>
-                    <include name="successfullyLogin"/>
+                    <include name="negativeLoginReturnToLanding"/>
             </methods>
             </class>
         </classes>
